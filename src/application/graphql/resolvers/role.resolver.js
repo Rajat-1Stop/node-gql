@@ -39,7 +39,9 @@ const roleResolver = {
         },
         updateRole: async (_, { id, data }, context) => {
             try {
+                console.log("=== Update Data === ", data)
                 const updatedRole = await updateRole(id, data);
+                console.log("=== Update === ", updatedRole)
                 return updatedRole;
             } catch (error) {
                 throw ApiError.internal(error.message);

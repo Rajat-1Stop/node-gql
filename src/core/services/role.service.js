@@ -33,7 +33,7 @@ const getRole = async (id) => {
             throw ApiError.internal("Role not found.");
         }
 
-        return ok('Role get successfully', role);
+        return role;
     } catch (error) {
         next(ApiError.badRequest(`Role View === ${error.message}`));
         return;
@@ -57,9 +57,10 @@ const updateRole = async (id, data) => {
             throw ApiError.internal("Role not found.");
         }
         
-        const updatedRole = await roleToUpdate.update({id, data});
+        const updatedRole = await roleToUpdate.update(data);
         // ok(res, 'Role updated successfully.', updatedRole);
-        return ok('Role updated successfully', updatedRole);
+        console.log("=== Update === ", updatedRole)
+        return updatedRole;
     } catch (error) {
         throw ApiError.internal(error.message);
     }
@@ -72,7 +73,8 @@ const deleteRole = async (id) => {
             throw ApiError.internal("Role not found.");
         }
         await roleToDelete.destroy();
-        return ok('Role deleted successfully', roleToDelete);
+        
+        return roleToDelete;
     } catch (error) {
         throw ApiError.internal(error.message);
     }

@@ -21,6 +21,7 @@ const roleDefs = gql`
 
     input RoleInput {
         name: String!
+        isActive: Boolean
     }
 
     type Mutation {
