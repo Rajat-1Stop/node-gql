@@ -1,48 +1,43 @@
 const { Role } = require('../models');
 const { ApiError, ok } = require('../../infrastructure/handler');
 
-const getRoles = async (req, res, next) => {
+const getRoles = async () => {
     try {
         const roles = await Role.findAll();
-        return ok(_, 'Role get successfully', roles);
+        return ok('Role get successfully', roles);
     } catch (error) {
         throw ApiError.internal(error.message);
     }
 }
 
-const getRole = async (req, res, next) => {
+const getRole = async (id) => {
     try {
-        const { id } = req.params;
-
         const role = await Role.findByPk(id);
         if (!role) {
             throw ApiError.internal("Role not found.");
         }
 
-        return ok(_, 'Role get successfully', role);
+        return ok('Role get successfully', role);
     } catch (error) {
         next(ApiError.badRequest(`Role View === ${error.message}`));
         return;
     }
 }
 
-const createRole = async (data, next) => {
+const createRole = async (data) => {
     try {
         const role = await Role.create(data);
         
         console.log("=== Service === ", role);
-        return ok(_, 'Role created successfully', role);
+        return ok('Role created successfully', role);
     } catch (error) {
         console.log("=== createRole === ", error.message)
         throw ApiError.internal(error.message);
     }
 }
 
-const updateRole = async (req, res, next) => {
+const updateRole = async (id, data) => {
     try {
-        const data = req.body;
-        const { id } = req.params;
-
         const roleToUpdate = await Role.findByPk(id);
         if (!roleToUpdate) {
             throw ApiError.internal("Role not found.");
@@ -50,33 +45,24 @@ const updateRole = async (req, res, next) => {
         
         const updatedRole = await roleToUpdate.update({id, data});
         // ok(res, 'Role updated successfully.', updatedRole);
-        return ok(_, 'Role updated successfully', updatedRole);
+        return ok('Role updated successfully', updatedRole);
     } catch (error) {
         throw ApiError.internal(error.message);
     }
 }
 
-const deleteRole = async (req, res, next) => {
+const deleteRole = async (id) => {
     try {
-        const { id } = req.params;
         const roleToDelete = await Role.findByPk(id);
         if (!roleToDelete) {
             throw ApiError.internal("Role not found.");
         }
         await roleToDelete.destroy();
-        return ok(_, 'Role deleted successfully', roleToDelete);
+        return ok('Role deleted successfully', roleToDelete);
     } catch (error) {
         throw ApiError.internal(error.message);
     }
 }
-
-// const RoleService = {
-//     async getAllRoles() {},
-//     async getRoleById(id) {},
-//     async createRole(name, isActive) {},
-//     async updateRole(id, updatedFields) {},
-//     async deleteRole(id) {},
-// }
 
 module.exports = {
     getRole,

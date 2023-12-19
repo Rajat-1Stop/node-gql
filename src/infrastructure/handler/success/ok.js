@@ -1,4 +1,4 @@
-const ok = (res, message, data = null, token = null) => {
+const ok = (message, data = null, token = null) => {
     const response = {
         status: 200,
         success: true,
@@ -13,7 +13,7 @@ const ok = (res, message, data = null, token = null) => {
         response.data = data;
     }
 
-    return res.status(200).json(response);
+    return response;
 };
 
 module.exports = { ok };
