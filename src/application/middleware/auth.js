@@ -1,5 +1,5 @@
-const { ApiError } = require('../../infrastructure/handler');
-const { decodeToken } = require('../../infrastructure/utils');
+const { ApiError } = require('@sequelize/infrastructure/handler');
+const { decodeToken } = require('@sequelize/infrastructure/utils');
 
 // Create auth middleware to check token from client
 const auth = async (req, res, next) => {
