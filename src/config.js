@@ -3,7 +3,11 @@ const config = {
     APP_URL: process.env.APP_URL,
     
     DB: {
-        URL: process.env.DB_URL,
+        HOST: process.env.DB_HOST,
+        USER: process.env.DB_USER,
+        NAME: process.env.DB_NAME,
+        PASS: process.env.DB_PASSWORD,
+        DIALECT: process.env.DB_DIALECT,
     },
 
     JWT: {

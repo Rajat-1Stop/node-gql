@@ -1,7 +1,8 @@
-const userResolver = require('./user');
+const roleResolver = require('./role.resolver');
+// const userResolver = require('./user.resolver');
 
 const resolvers = {
-    ...userResolver
+    ...roleResolver
 }
 
 module.exports = { resolvers };
