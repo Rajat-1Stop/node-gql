@@ -1,4 +1,4 @@
-const roleDefs = require('./role');
+const roleDefs = require('./role.schema');
 // const userDefs = require('./user');
 
 const typeDefs = {

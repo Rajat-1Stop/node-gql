@@ -6,7 +6,8 @@ const getRoles = async (req, res, next) => {
         const roles = await Role.findAll();
         return ok(_, 'Role get successfully', roles);
     } catch (error) {
-        throw ApiError.internal(error.message);
+        next(ApiError.badRequest(`Role List === ${error.message}`));
+        return;
     }
 }
 
@@ -19,6 +20,7 @@ const getRole = async (req, res, next) => {
             throw ApiError.internal("Role not found.");
         }
 
+        // ok(res, 'Role fetched successfully.', role);
         return ok(_, 'Role get successfully', role);
     } catch (error) {
         next(ApiError.badRequest(`Role View === ${error.message}`));
@@ -69,14 +71,6 @@ const deleteRole = async (req, res, next) => {
         throw ApiError.internal(error.message);
     }
 }
-
-// const RoleService = {
-//     async getAllRoles() {},
-//     async getRoleById(id) {},
-//     async createRole(name, isActive) {},
-//     async updateRole(id, updatedFields) {},
-//     async deleteRole(id) {},
-// }
 
 module.exports = {
     getRole,

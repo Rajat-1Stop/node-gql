@@ -14,8 +14,7 @@ const roleResolver = {
                 const fetchedRole = await getRole(id);
                 return fetchedRole;
             } catch (error) {
-                next(ApiError.badRequest(`Role View === ${error.message}`));
-                return;
+                throw ApiError.internal(error.message);
             }
         },
         roles: async () => {
@@ -23,8 +22,7 @@ const roleResolver = {
                 const allRoles = await getRoles();
                 return allRoles;
             } catch (error) {
-                next(ApiError.badRequest(`Role List === ${error.message}`));
-                return;
+                throw ApiError.internal(error.message);
             }
         },
     },
@@ -32,9 +30,11 @@ const roleResolver = {
         createRole: async (_, { data }, context) => {
             try {
                 const newRole = await createRole(data);
+                console.log("=== Create === ", newRole)
                 return newRole;
             } catch (error) {
-                // Handle errors appropriately
+                console.log("=== Error === ", error.message)
+                throw ApiError.internal(error.message);
             }
         },
         updateRole: async (_, { id, data }, context) => {
@@ -42,7 +42,7 @@ const roleResolver = {
                 const updatedRole = await updateRole(id, data);
                 return updatedRole;
             } catch (error) {
-                // Handle errors appropriately
+                throw ApiError.internal(error.message);
             }
         },
         deleteRole: async (_, { id }, context) => {
@@ -50,7 +50,7 @@ const roleResolver = {
                 const deletedRole = await deleteRole(id);
                 return deletedRole;
             } catch (error) {
-                // Handle errors appropriately
+                throw ApiError.internal(error.message);
             }
         },
     },
