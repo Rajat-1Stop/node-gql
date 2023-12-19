@@ -7,14 +7,20 @@ const roleDefs = gql`
         isActive: Boolean!
     }
 
+    input QueryInput {
+        rowsPerPage: Int
+        page: Int
+        order: String!
+        orderBy: String!
+    }
+
     type Query {
         role(id: ID!): Role
-        roles: [Role]
+        roles(data: QueryInput!): [Role]
     }
 
     input RoleInput {
         name: String!
-        # Add other fields if required for create/update operations
     }
 
     type Mutation {

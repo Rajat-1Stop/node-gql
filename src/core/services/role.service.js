@@ -1,10 +1,26 @@
 const { Role } = require('../models');
 const { ApiError, ok } = require('../../infrastructure/handler');
 
-const getRoles = async () => {
+const getRoles = async (data) => {
     try {
-        const roles = await Role.findAll();
-        return ok('Role get successfully', roles);
+        const {page, rowsPerPage, order, orderBy} = data;
+
+        const sortOptions = [
+            [orderBy, order]
+        ];
+
+        const paginationOptions = {
+            limit: rowsPerPage,
+            offset: (page - 1) * rowsPerPage
+        };
+
+        const roles = await Role.findAll({
+            order: sortOptions,
+            limit: paginationOptions.limit,
+            offset: paginationOptions.offset,
+        });
+        
+        return roles;
     } catch (error) {
         throw ApiError.internal(error.message);
     }
@@ -27,9 +43,7 @@ const getRole = async (id) => {
 const createRole = async (data) => {
     try {
         const role = await Role.create(data);
-        
-        console.log("=== Service === ", role);
-        return ok('Role created successfully', role);
+        return role;
     } catch (error) {
         console.log("=== createRole === ", error.message)
         throw ApiError.internal(error.message);

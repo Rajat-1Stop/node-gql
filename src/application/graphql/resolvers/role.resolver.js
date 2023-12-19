@@ -17,9 +17,9 @@ const roleResolver = {
                 throw ApiError.internal(error.message);
             }
         },
-        roles: async () => {
+        roles: async (_, { data }, context) => {
             try {
-                const allRoles = await getRoles();
+                const allRoles = await getRoles(data);
                 return allRoles;
             } catch (error) {
                 throw ApiError.internal(error.message);
