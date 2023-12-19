@@ -49,9 +49,10 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         gender: {
-            type: DataTypes.ENUM('male', 'female', 'other'),
-            defaultValue: 'male',
+            type: DataTypes.INTEGER,
+            defaultValue: 1,
             allowNull: true,
+            description: '1=male, 2=female, 3=other'
         },
         isActive: {
             type: DataTypes.BOOLEAN,

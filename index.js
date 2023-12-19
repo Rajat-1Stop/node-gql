@@ -1,10 +1,12 @@
 require('dotenv').config();
+require('module-alias/register');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs } = require('./src/application/graphql/schemas');
-const { resolvers } = require('./src/application/graphql/resolvers');
+const { ErrorHandler } = require('./src/infrastructure/handler');
+const { typeDefs } = require('@sequelize/application/graphql/schemas');
+const { resolvers } = require('@sequelize/application/graphql/resolvers');
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(
         origin: '*',
     })
 );
+app.use(ErrorHandler);
 
 const server = new ApolloServer({
     typeDefs,
