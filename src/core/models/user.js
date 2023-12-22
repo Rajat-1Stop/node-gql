@@ -1,5 +1,9 @@
 const bcrypt = require('bcrypt');
+const { APP_URL } = require('../../config');
 const { Model, DataTypes } = require('sequelize');
+const { 
+    convertToUTC
+} = require('../../infrastructure/utils');
 
 module.exports = (sequelize) => {
     class User extends Model {
@@ -83,6 +87,14 @@ module.exports = (sequelize) => {
         tableName: 'users',
         paranoid: true,
         timestamps: true,
+        getterMethods: {
+            imageUrl() {
+                if (this.image) {
+                    return `${APP_URL}/uploads/User/${this.image}`; 
+                }
+                return null;
+            }
+        },
     });
 
     User.beforeSave(async (user, options) => {
@@ -95,7 +107,9 @@ module.exports = (sequelize) => {
         }
 
         if (user.changed('dateOfBirth')) {
-            user.dateOfBirth = null;
+            if(user.dateOfBirth) {
+                user.dateOfBirth = convertToUTC(user.dateOfBirth);
+            }
         }
     });
 

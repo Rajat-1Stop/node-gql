@@ -19,10 +19,13 @@
     },
     "homepage": "https://github.com/Rajat-1Stop/node-gql#readme",
     "dependencies": {
+        "@graphql-tools/merge": "^9.0.1",
         "apollo-server-express": "^3.13.0",
         "bcrypt": "^5.1.1",
         "body-parser": "^1.20.2",
         "cors": "^2.8.5",
+        "date-fns": "^2.30.0",
+        "date-fns-tz": "^2.0.0",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "fs": "^0.0.1-security",
