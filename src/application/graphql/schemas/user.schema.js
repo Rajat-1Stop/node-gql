@@ -3,6 +3,12 @@ const { gql } = require('apollo-server-express')
 const userDefs = gql`
     scalar DateTime
 
+    type UserRole {
+        id: ID!
+        roleId: Int!
+        userId: Int!
+    }
+
     type User {
         id: ID!
         firstName: String
@@ -43,9 +49,15 @@ const userDefs = gql`
         isActive: Boolean
     }
 
+    input UserRoleInput {
+        roleId: Int!
+        userId: Int!
+    }
+
     type Mutation {
         createUser(data: UserInput!): User
         updateUser(id: ID!, data: UserInput!): User
+        assignRole(data: UserRoleInput!): UserRole
         deleteUser(id: ID!): User
     }
 `;
