@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
+const { auth } = require('./src/application/middleware')
 const { ErrorHandler } = require('./src/infrastructure/handler');
 const { typeDefs } = require('@sequelize/application/graphql/schemas');
 const { resolvers } = require('@sequelize/application/graphql/resolvers');
@@ -21,12 +22,13 @@ app.use(
         origin: '*',
     })
 );
+// app.use(auth);
 app.use(ErrorHandler);
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: async () => { return true; }
+    context: async ({ req }) => null,
 });
 
 async function startServer() {

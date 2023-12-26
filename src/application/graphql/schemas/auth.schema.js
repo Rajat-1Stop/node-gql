@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express')
 
-const userDefs = gql`
+const authDefs = gql`
     scalar DateTime
 
     type User {
@@ -19,19 +19,7 @@ const userDefs = gql`
         createdAt: DateTime
     }
 
-    input QueryInput {
-        rowsPerPage: Int
-        page: Int
-        order: String!
-        orderBy: String!
-    }
-
-    type Query {
-        user(id: ID!): User
-        users(data: QueryInput!): [User]
-    }
-
-    input UserInput {
+    input registerInput {
         firstName: String!
         lastName: String!
         email: String!
@@ -40,14 +28,20 @@ const userDefs = gql`
         image: String!
         gender: Int
         dateOfBirth: DateTime!
+        password: String!
+        confirmPassword: String!
         isActive: Boolean
     }
 
+    input loginInput {
+        email: String!
+        password: String!
+    }
+
     type Mutation {
-        createUser(data: UserInput!): User
-        updateUser(id: ID!, data: UserInput!): User
-        deleteUser(id: ID!): User
+        loginUser(data: loginInput!): User
+        registerUser(data: registerInput!): User
     }
 `;
 
-module.exports = userDefs;
+module.exports = authDefs;

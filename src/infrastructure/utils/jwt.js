@@ -16,19 +16,18 @@ const generateToken = (id, role) => {
 };
 
 // Verify JWT token
-const verifyToken = (token, next) => {
+const verifyToken = (token) => {
     jwt.verify(token, SECRET, (err) => {
         if (err) {
-            next(ApiError.unauthorized(err.message));
-            return;
+            throw ApiError.unauthorized(err.message);
         }
     });
     return true;
 };
 
 // Decode JWT token
-const decodeToken = (token, next) => {
-    const verify = verifyToken(token, next);
+const decodeToken = (token) => {
+    const verify = verifyToken(token);
     if (verify) {
         return jwt.decode(token);
     }
