@@ -1,5 +1,9 @@
+const AuthService = require('./auth.service');
 const RoleService = require('./role.service');
+const UserService = require('./user.service');
 
 module.exports = { 
-    ...RoleService 
+    ...AuthService,
+    ...RoleService,
+    ...UserService 
 };
