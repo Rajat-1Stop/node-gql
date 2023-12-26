@@ -12,6 +12,7 @@ const userDefs = gql`
         phone: String
         phone2: String
         image: String
+        imageUrl: String
         gender: Int
         dateOfBirth: DateTime
         isActive: Boolean!

@@ -22,16 +22,13 @@ app.use(
         origin: '*',
     })
 );
-app.use(auth);
+// app.use(auth);
 app.use(ErrorHandler);
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: async ({ req }) => {
-        console.log("=== Context === ", req.user)
-        return { user: req.user };
-    },
+    context: async ({ req }) => null,
 });
 
 async function startServer() {

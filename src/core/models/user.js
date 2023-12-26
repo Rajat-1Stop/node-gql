@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt');
+const { getTime } = require('date-fns');
 const { APP_URL } = require('../../config');
 const { Model, DataTypes } = require('sequelize');
 const { 
-    convertToUTC
+    convertToUTC,
+    uploadSingle
 } = require('../../infrastructure/utils');
 
 module.exports = (sequelize) => {
@@ -109,6 +111,21 @@ module.exports = (sequelize) => {
         if (user.changed('dateOfBirth')) {
             if(user.dateOfBirth) {
                 user.dateOfBirth = convertToUTC(user.dateOfBirth);
+            }
+        }
+
+        if (user.changed('image')) {
+            const matches = user.image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+            if (matches || matches.length === 3) {
+                const fileName = `${getTime(new Date())}_${Math.floor(1000 + Math.random() * 9000)}.jpeg`
+                const uploaded = uploadSingle({
+                    file: matches,
+                    folder: 'User',
+                    fileName: fileName,
+                });
+                if (uploaded) {
+                    user.image = fileName;
+                }
             }
         }
     });
