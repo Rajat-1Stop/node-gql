@@ -1,9 +1,5 @@
 const bcrypt = require('bcrypt');
-const { getTime } = require('date-fns');
-const { User } = require('../models');
-const { 
-    uploadSingle
-} = require('../../infrastructure/utils');
+const { User, Role, UserRole } = require('../models');
 const { ApiError } = require('../../infrastructure/handler');
 
 const getUsers = async (data) => {
@@ -93,10 +89,36 @@ const deleteUser = async (id) => {
     }
 }
 
+const assignRole = async (data) => {
+    try {
+        const userRole = await UserRole.findOne({where: {roleId: data.roleId, userId: data.userId}});
+        if (userRole) {
+            throw ApiError.internal("Role is already assigned.");
+        } 
+
+        const userToAssign = await User.findByPk(data.userId);
+        if (!userToAssign) {
+            throw ApiError.internal("User not found.");
+        }
+
+        const roleToAssign = await Role.findByPk(data.roleId);
+        if (!roleToAssign) {
+            throw ApiError.internal("Role not found.");
+        }
+        
+        const roleData = await UserRole.create(data);
+        const assignement = await UserRole.findByPk(roleData.id);
+        return assignement;
+    } catch (error) {
+        throw ApiError.internal(error.message);
+    }
+}
+
 module.exports = {
     getUser,
     getUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    assignRole
 };
