@@ -3,7 +3,8 @@ const {
     getUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    assignRole
 } = require('../../../core/services');
 const { ApiError } = require('@sequelize/infrastructure/handler');
 
@@ -47,6 +48,14 @@ const userResolver = {
             try {
                 const deletedUser = await deleteUser(id);
                 return deletedUser;
+            } catch (error) {
+                throw ApiError.internal(error.message);
+            }
+        },
+        assignRole: async (_, { data }, context) => {
+            try {
+                const assigned = await assignRole(data);
+                return assigned;
             } catch (error) {
                 throw ApiError.internal(error.message);
             }
