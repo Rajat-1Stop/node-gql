@@ -19,8 +19,16 @@ const getUsers = async (data) => {
             order: sortOptions,
             limit: paginationOptions.limit,
             offset: paginationOptions.offset,
+            include: [
+                {
+                    model: UserRole,
+                    as: 'userRole',
+                    include: [
+                        { model: Role, as: 'role', },
+                    ]
+                },
+            ],
         });
-        
         return users;
     } catch (error) {
         throw ApiError.internal(error.message);

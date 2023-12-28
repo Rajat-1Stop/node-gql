@@ -3,9 +3,14 @@ const { gql } = require('apollo-server-express')
 const userDefs = gql`
     scalar DateTime
 
+    type Role {
+        id: ID!
+        name: String!
+    }
+
     type UserRole {
         id: ID!
-        roleId: Int!
+        role: Role!
         userId: Int!
     }
 
@@ -22,6 +27,7 @@ const userDefs = gql`
         gender: Int
         dateOfBirth: DateTime
         isActive: Boolean!
+        userRole: UserRole
         createdAt: DateTime
     }
 

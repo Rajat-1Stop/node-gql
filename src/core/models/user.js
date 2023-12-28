@@ -9,8 +9,8 @@ const {
 
 module.exports = (sequelize) => {
     class User extends Model {
-        static associate({ }) {
-            
+        static associate({ UserRole }) {
+            User.hasOne(UserRole, { as: 'userRole', foreignKey: 'userId', onDelete: 'CASCADE' });
         }
     }
 
