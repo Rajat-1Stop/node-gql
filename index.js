@@ -28,7 +28,15 @@ app.use(ErrorHandler);
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: async ({ req }) => null,
+    context: async ({ req }) => {
+        const token = req.headers.authorization || null;
+
+        if(token){
+            return await auth(token);
+        }
+
+        return null;
+    },
 });
 
 async function startServer() {

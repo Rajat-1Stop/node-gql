@@ -6,7 +6,7 @@ const role = (role) => {
         if(!req.user || req.user.role !== role) {
             throw ApiError.forbidden('Access Forbidden: This resource is not available for your account.');
         }
-        next();
+        return;
     };
 };
 

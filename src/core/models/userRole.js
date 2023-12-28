@@ -3,8 +3,9 @@ const { Role, User } = require('../models')
 
 module.exports = (sequelize) => {
     class UserRole extends Model {
-        static associate({ }) {
-            
+        static associate({ Role, User }) {
+            UserRole.belongsTo(Role, { as: 'role', foreignKey: 'roleId', onDelete: 'CASCADE' });
+            UserRole.belongsTo(User, { as: 'user', foreignKey: 'userId', onDelete: 'CASCADE' });
         }
     }
 
