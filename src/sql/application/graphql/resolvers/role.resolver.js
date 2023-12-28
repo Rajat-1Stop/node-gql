@@ -4,8 +4,8 @@ const {
     createRole,
     updateRole,
     deleteRole
-} = require('../../../core/services');
-const { ApiError } = require('@sequelize/infrastructure/handler');
+} = require('@sql/core/services');
+const { ApiError } = require('@sql/infrastructure/handler');
 
 const roleResolver = {
     Query: {

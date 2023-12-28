@@ -1,5 +1,5 @@
 const { Role } = require('../models');
-const { ApiError, ok } = require('../../infrastructure/handler');
+const { ApiError, ok } = require('@sql/infrastructure/handler');
 
 const getRoles = async (req, res, next) => {
     try {

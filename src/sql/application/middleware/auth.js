@@ -1,6 +1,6 @@
-const { User } = require('../../core/models');
-const { ApiError } = require('@sequelize/infrastructure/handler');
-const { decodeToken } = require('@sequelize/infrastructure/utils');
+const { User } = require('@sql/core/models');
+const { ApiError } = require('@sql/infrastructure/handler');
+const { decodeToken } = require('@sql/infrastructure/utils');
 
 // Create auth middleware to check splitToken from client
 const auth = async (token) => {

@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
 const { getTime } = require('date-fns');
-const { APP_URL } = require('../../config');
+const { APP_URL } = require('@src/config');
 const { Model, DataTypes } = require('sequelize');
 const { 
     convertToUTC,
     uploadSingle
-} = require('../../infrastructure/utils');
+} = require('@sql/infrastructure/utils');
 
 module.exports = (sequelize) => {
     class User extends Model {

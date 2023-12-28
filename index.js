@@ -4,10 +4,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
-const { auth } = require('./src/application/middleware')
-const { ErrorHandler } = require('./src/infrastructure/handler');
-const { typeDefs } = require('@sequelize/application/graphql/schemas');
-const { resolvers } = require('@sequelize/application/graphql/resolvers');
+const { auth } = require('@sql/application/middleware')
+const { ErrorHandler } = require('@sql/infrastructure/handler');
+const { typeDefs } = require('@sql/application/graphql/schemas');
+const { resolvers } = require('@sql/application/graphql/resolvers');
 
 const app = express();
 

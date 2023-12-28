@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT } = require('@sequelize/config');
+const { JWT } = require('@src/config');
 const { ApiError } = require('../handler');
 
 const { SECRET, EXPIRES, ALGORITHM } = JWT;

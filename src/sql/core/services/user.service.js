@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { User, Role, UserRole } = require('../models');
-const { ApiError } = require('../../infrastructure/handler');
+const { ApiError } = require('@sql/infrastructure/handler');
 
 const getUsers = async (data) => {
     try {
