@@ -6,7 +6,7 @@ const {
     RoleAction,
     UserAction 
 } = require('../models');
-const { ApiError } = require('../../infrastructure/handler');
+const { ApiError } = require('@sql/infrastructure/handler');
 
 const roleAction = async (data) => {
     try {

@@ -5,10 +5,10 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.APP_ENV;
-const config = require(path.join(`${require.main.path}/src/core/database/${env}`));
+const config = require(path.join(`${require.main.path}/src/sql/core/database/${env}`));
 const db = {};
 
-console.log("===== DB ===== ", `${require.main.path}/src/core/database/${env}`);
+console.log("===== DB ===== ", `${require.main.path}/src/sql/core/database/${env}`);
 
 let sequelize;
 if (config.use_env_variable) {

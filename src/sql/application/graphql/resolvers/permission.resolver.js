@@ -1,18 +1,16 @@
 const {
     userAction,
     roleAction
-} = require('../../../core/services');
-const { ApiError } = require('@sequelize/infrastructure/handler');
+} = require('@sql/core/services');
+const { ApiError } = require('@sql/infrastructure/handler');
 
 const roleResolver = {
     Mutation: {
         userAction: async (_, { data }, context) => {
             try {
                 const add = await userAction(data);
-                console.log("=== Create === ", add)
                 return add;
             } catch (error) {
-                console.log("=== Error === ", error.message)
                 throw ApiError.internal(error.message);
             }
         },

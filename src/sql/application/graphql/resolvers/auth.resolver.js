@@ -1,11 +1,11 @@
-const { ApiError } = require('@sequelize/infrastructure/handler');
+const { ApiError } = require('@sql/infrastructure/handler');
 const { 
     generateToken
-} = require('../../../infrastructure/utils');
+} = require('@sql/infrastructure/utils');
 const {
     login,
     register
-} = require('../../../core/services');
+} = require('@sql/core/services');
 
 const authResolver = {
     Query: {},

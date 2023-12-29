@@ -1,4 +1,4 @@
-const { ApiError } = require('@sequelize/infrastructure/handler');
+const { ApiError } = require('@sql/infrastructure/handler');
 
 // Create auth middleware to check token from client
 const role = (role) => {

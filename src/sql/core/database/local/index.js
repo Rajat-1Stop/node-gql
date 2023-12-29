@@ -1,4 +1,4 @@
-const { DB } = require('@sequelize/config');
+const { DB } = require('@src/config');
 
 const local = {    
     "host": DB.HOST,
