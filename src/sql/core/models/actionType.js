@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const { ActionTypes } = require('../enums')
 
 module.exports = (sequelize) => {
     class ActionType extends Model {
@@ -15,7 +16,7 @@ module.exports = (sequelize) => {
             autoIncrement: true,
         },
         name: {
-            type: DataTypes.ENUM('List', 'View', 'Insert', 'Update', 'Delete'),
+            type: DataTypes.ENUM(...Object.values(ActionTypes)),
             allowNull: false,
         },
         description: {
