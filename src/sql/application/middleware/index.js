@@ -1,7 +1,7 @@
 const authMiddleware = require('./auth');
-const roleMiddleware = require('./role');
+const permissionMiddleware = require('./permission');
 
 module.exports = {
-    ...roleMiddleware,
+    ...permissionMiddleware,
     ...authMiddleware
 }
