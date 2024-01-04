@@ -18,7 +18,6 @@ const auth = async (token) => {
         if (!decode_token) {
             throw ApiError.unauthorized('Token is not valid.');
         }
-        console.log("=== Token === ", splitToken)
         
         const user = await User.findByPk(decode_token.id);
         if (!user) {
