@@ -6,14 +6,18 @@ const {
     deleteUser,
     assignRole
 } = require('@sql/core/services');
+const { ModuleList, ActionTypes } = require('@sql/core/enums')
 const { ApiError } = require('@sql/infrastructure/handler');
-const { permission } = require('../../middleware');
+const { permission } = require('@sql/application/middleware');
+
+const {USER} = ModuleList;
+const {LIST, VIEW, INSERT, UPDATE, DELETE} = ActionTypes;
 
 const userResolver = {
     Query: {
         user: async (_, { id }, context) => {
             try {
-                const checkPermission = await permission(context.user, 'View');
+                const checkPermission = await permission(context.user, USER, VIEW);
                 if(!checkPermission) {
                     throw ApiError.unauthorized("You're not authorized to perform this action.");
                 }
@@ -25,7 +29,7 @@ const userResolver = {
         },
         users: async (_, { data }, context) => {
             try {
-                const checkPermission = await permission(context.user, 'List');
+                const checkPermission = await permission(context.user, USER, LIST);
                 if(!checkPermission) {
                     throw ApiError.unauthorized("You're not authorized to perform this action.");
                 }
