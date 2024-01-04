@@ -28,7 +28,6 @@ const getUsers = async (data) => {
                     ]
                 },
             ],
-            group: ['phone'],
         });
         return users;
     } catch (error) {

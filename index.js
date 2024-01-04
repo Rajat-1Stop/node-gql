@@ -28,14 +28,16 @@ app.use(ErrorHandler);
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
     context: async ({ req }) => {
         const token = req.headers.authorization || null;
 
-        if(token){
-            return await auth(token);
+        if (token) {
+            const user = await auth(token);
+            return {user: user};
         }
 
-        return null;
+        return {user: null};
     },
 });
 

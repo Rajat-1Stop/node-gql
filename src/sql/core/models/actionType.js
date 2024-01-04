@@ -15,8 +15,8 @@ module.exports = (sequelize) => {
             autoIncrement: true,
         },
         name: {
-            type: DataTypes.STRING,
-            allowNull: false,        
+            type: DataTypes.ENUM('List', 'View', 'Insert', 'Update', 'Delete'),
+            allowNull: false,
         },
         description: {
             type: DataTypes.TEXT,

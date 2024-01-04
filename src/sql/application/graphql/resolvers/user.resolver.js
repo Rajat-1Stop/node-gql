@@ -7,11 +7,16 @@ const {
     assignRole
 } = require('@sql/core/services');
 const { ApiError } = require('@sql/infrastructure/handler');
+const { permission } = require('../../middleware');
 
 const userResolver = {
     Query: {
         user: async (_, { id }, context) => {
             try {
+                const checkPermission = await permission(context.user, 'View');
+                if(!checkPermission) {
+                    throw ApiError.unauthorized("You're not authorized to perform this action.");
+                }
                 const fetchedUser = await getUser(id);
                 return fetchedUser;
             } catch (error) {
@@ -20,6 +25,11 @@ const userResolver = {
         },
         users: async (_, { data }, context) => {
             try {
+                const checkPermission = await permission(context.user, 'List');
+                if(!checkPermission) {
+                    throw ApiError.unauthorized("You're not authorized to perform this action.");
+                }
+                
                 const allUsers = await getUsers(data);
                 return allUsers;
             } catch (error) {
